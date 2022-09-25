@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReplyMapper">
+  <insert id="add" parameterType="rvo">
+    insert into replies(pno, replier, reply, reg_at) values(#{pno}, #{replier}, #{reply}, now())
+  </insert>
+  <select id="list" resultType="rvo" parameterType="int">
+    select * from replies where pno = #{pno}
+  </select>
+  <update id="mod" parameterType="rvo">
+    update replies set reply = #{reply}, mod_at = now() where rno = #{rno}
+  </update>
+  <delete id="del" parameterType="long">
+    delete from replies where rno = #{rno}
+  </delete>
+  <delete id="delAll" parameterType="int">
+    delete from replies where pno = #{pno}
+  </delete>
+</mapper>
