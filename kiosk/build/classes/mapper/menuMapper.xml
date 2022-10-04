@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MenuMapper">
+  <insert id="add" parameterType="mvo">
+    insert into menu(name, price, type, image) values(#{name}, #{price}, #{type}, #{image})
+  </insert>
+  <select id="list" resultType="mvo">
+    select * from menu
+  </select>
+  <select id="typelist" parameterType="string" resultType="mvo">
+    select * from menu 
+    <if test="type!='all'">where type = #{type}</if>
+  </select>
+  <select id="detail" parameterType="string" resultType="mvo">
+    select * from menu where name = #{name}
+  </select>
+  <update id="mod" parameterType="mvo">
+    update menu set price = #{price}, image = #{image} where name = #{name}
+  </update>
+  <delete id="del" parameterType="string">
+    delete from menu where name = #{name}
+  </delete>
+</mapper>
